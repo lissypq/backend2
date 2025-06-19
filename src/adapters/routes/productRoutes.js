@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const  permiso = require('../middlewares/checkAdminRole')
+// const { verifyToken } = require('./adapters/middlewares/authJwt');
 
 module.exports = (productController) => {
 
@@ -27,7 +29,7 @@ module.exports = (productController) => {
    */
  
   router.get('/', (req, res) => productController.getAll(req, res));
-  router.post('/', (req, res) => productController.create(req, res));
+  router.post('/',permiso, (req, res) => productController.create(req, res));
 
   return router;
 };
